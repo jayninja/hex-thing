@@ -20,7 +20,7 @@ func main() {
 	var hexstring string
 	fmt.Println("give me a hex thing: ")
 	fmt.Scanln(&hexstring)
-	//hexstring = "0xFFFF"
+	//hexstring = "0xA4FFF"
 
 	// check for the typical hex prefix
 	if strings.HasPrefix(hexstring, "0x") {
@@ -29,8 +29,20 @@ func main() {
 		fmt.Println("bad input")
 		os.Exit(3)
 	}
+
+	// Uppercase the entire string.
+	hexstring = strings.ToUpper(hexstring)
+
 	// creates slices of rune...
 	a := []rune(hexstring)
+
+	// quickly validate the rest of our hex characters
+	for iterator := len(hexstring) - 1; iterator > 2; iterator-- {
+		if a[iterator] > 70 || a[iterator] < 48 || (a[iterator] < 65 && a[iterator] > 57) {
+			fmt.Println("Valid hex characters only please")
+			os.Exit(3)
+		}
+	}
 
 	j := len(a) - 1 // because our index starts at 0, and length at 1
 	last_element := j
