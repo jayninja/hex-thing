@@ -1,0 +1,2 @@
+# hex-thing
+golang exercise 
