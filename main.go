@@ -24,7 +24,7 @@ func main() {
 
 	// check for the typical hex prefix
 	if strings.HasPrefix(hexstring, "0x") {
-		//fmt.Println("has prefix")
+		// do nothing, input is valid
 	} else {
 		fmt.Println("bad input")
 		os.Exit(3)
@@ -32,13 +32,14 @@ func main() {
 	// creates slices of rune...
 	a := []rune(hexstring)
 
-	j := len(a) - 1
+	j := len(a) - 1 // because our index starts at 0, and length at 1
 	last_element := j
-	first_element := 2 // 0,1 are the prefix
-	reverse_order := ""
-	carry_over := 0
-	first_element_bit := 0
+	first_element := 2     // 0,1 are the prefix so the first one we care about is 2
+	first_element_bit := 0 // used to tell when the first element has a carry_over
+	carry_over := 0        // decide if we need to carry over
+	reverse_order := ""    // string to build our result
 
+	// more than 1 and we are at our first_element
 	for j > 1 {
 
 		if j == last_element {
@@ -71,6 +72,7 @@ func main() {
 		}
 
 		j-- // decrement
+
 	}
 	fmt.Println("0x" + reverse_order)
 }
