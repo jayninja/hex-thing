@@ -20,7 +20,7 @@ func main() {
 	var hexstring string
 	fmt.Println("give me a hex thing: ")
 	fmt.Scanln(&hexstring)
-	//hexstring = "0xA4FFF"
+	//hexstring = "0xA499F"
 
 	// check for the typical hex prefix
 	if strings.HasPrefix(hexstring, "0x") {
@@ -69,11 +69,17 @@ func main() {
 			carry_over, a[j] = carry_or_no(a[j])
 			first_element_bit = 1
 		}
+		// gross hack to skip over these ascii values.
+		if (a[j] > 57) && (a[j] < 64) {
+			a[j] = a[j] + 7
+		}
 
-		if j != last_element && carry_over == 0 {
-		} // do nothing
-		if j == first_element && carry_over == 0 {
-		} // do nothing
+		/*
+			if j != last_element && carry_over == 0 {
+			} // do nothing
+			if j == first_element && carry_over == 0 {
+			} // do nothing
+		*/
 
 		reverse_order = string(a[j]) + reverse_order
 
